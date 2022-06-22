@@ -30,5 +30,9 @@ jobs:
       - name: Configure remote repository
         run: |
           git remote set-url origin "https://0nary:$(GitHubAccessToken)@github.com/0nary/Test.git"
+      - name : Install Versioning.NET
+        run: |
           dotnet tool install --global Versioning.NET
-          dotnet-version increment-version-with-git -g "." --branch-name main
+      - name : Updating version
+        run: |
+          dotnet-version increment-version-with-git -g "." --b main
