@@ -24,9 +24,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo "https://[user]:[password]@github.com/[repo]/test.git"
 
-      - name: Configure remote repository
-        run: |
-          git remote set-url origin "https://[user]:[password]@github.com/[repo]/test.git"
-          dotnet tool install --global Versioning.NET
-          dotnet-version increment-version-with-git -g "." --branch-name main --author-email pipeline@github.com
+     # - name: Configure remote repository
+     #   run: |
+     #     git remote set-url origin "https://[user]:[password]@github.com/[repo]/test.git"
+      #    dotnet tool install --global Versioning.NET
+       #   dotnet-version increment-version-with-git -g "." --branch-name main --author-email pipeline@github.com
