@@ -12,7 +12,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.2.0",
+    "version": "2.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
       "projectName": "TestConsoleApp",
