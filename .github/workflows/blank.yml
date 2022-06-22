@@ -27,7 +27,7 @@ jobs:
       
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo "https://[user]:[password]@github.com/[repo]/test.git"
+        run: echo https://[user]:[password]@github.com/[repo]/test.git
 
      # - name: Configure remote repository
      #   run: |
