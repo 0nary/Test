@@ -30,3 +30,4 @@ jobs:
       - name : Updating version
         run: |
           dotnet-version increment-version -d "." -v "minor"
+          dotnet-version increment-version-with-git -g "." -b main
