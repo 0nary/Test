@@ -29,6 +29,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          
+      - name: test
+        run: echo ${{ needs.test.outputs.success }}
 
       - name: Configure remote repository
         run: |
