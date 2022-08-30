@@ -29,7 +29,7 @@ jobs:
 
       - name: Configure remote repository
         run: |
-          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUBACCESSTOKEN }}@github.com/0nary/Test.git"
+          git remote set-url origin "https://0nary:${{ secrets.GITHUBACCESSTOKEN }}@github.com/0nary/Test.git"
       - name : Install Versioning.NET
         run: |
           dotnet tool install --global Versioning.NET
