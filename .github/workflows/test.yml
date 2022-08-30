@@ -1,0 +1,14 @@
+name: .NET
+
+on:
+   workflow_call:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: test echo
+      run: echo "Test"
