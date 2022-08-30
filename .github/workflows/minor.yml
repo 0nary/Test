@@ -29,5 +29,5 @@ jobs:
           dotnet tool install --global Versioning.NET
       - name : Updating version
         run: |
-          dotnet-version increment-version -d "." -v "minor"
-          dotnet-version increment-version-with-git -g "." -b main
+          dotnet-version increment-version-with-git -h
+          dotnet-version increment-version-with-git -g "." -b main -v "Minor"
