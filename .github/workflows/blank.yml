@@ -36,3 +36,13 @@ jobs:
       - name : Updating version
         run: |
           dotnet-version increment-version-with-git -g "." -b main
+          
+      #Setup and Build
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
