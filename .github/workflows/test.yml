@@ -13,11 +13,11 @@ jobs:
 
     steps:
     - name: set default output
-      run: ::set-output name=success::false
+      run: echo "::set-output name=success::false"
       
     - uses: actions/checkout@v3
     - name: test echo
       run: echo "Test"
    
     - name: update output
-      run: ::set-output name=success::true
+      run: echo "::set-output name=success::true"
