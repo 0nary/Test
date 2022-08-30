@@ -1,4 +1,4 @@
-ame: Release 
+name: Release 
 # The new release workflow is triggered when a new tag on the release
 # branch is pushed.
 #
