@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ outputs.success }}
+      output1: ${{ steps.outputs.success }}
 
     steps:
     - name: set default output
