@@ -5,13 +5,13 @@
   },
   "projects": {
     "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj": {
-      "version": "3.0.0",
+      "version": "4.9.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
         "projectName": "TestConsoleApp",
         "projectPath": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\obj\\",
+        "outputPath": "C:\\Users\\User\\Source\\Repos\\0nary\\Test\\TestConsoleApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -49,7 +49,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -58,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
