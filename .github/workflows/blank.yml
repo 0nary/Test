@@ -30,15 +30,15 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: test
-        run: echo ${{ needs.test.outputs.success }}
+      #- name: test
+      #  run: echo ${{ needs.test.outputs.success }}
 
-      - name: Configure remote repository
-        run: |
-          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/0nary/Test.git"
-      - name : Install Versioning.NET
-        run: |
-          dotnet tool install --global Versioning.NET
+      #- name: Configure remote repository
+      #  run: |
+      #    git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/0nary/Test.git"
+      #- name : Install Versioning.NET
+      #  run: |
+      #    dotnet tool install --global Versioning.NET
       - name : Updating version
         run: |
           dotnet-version increment-version-with-git -g "." -b main
