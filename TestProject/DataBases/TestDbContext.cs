@@ -14,7 +14,7 @@ namespace TestProject.DataBases
             get 
             {
                 DbContextOptionsBuilder<TestDbContext> builder = new DbContextOptionsBuilder<TestDbContext>();
-                builder.UseSqlServer("Server=127.0.0.1,1433;Database=Neuroglia.Sowl.PosManager;User Id=SA;Password=yourStrong(!)Password;MultipleActiveResultSets=true");
+                builder.UseSqlServer("Server=127.0.0.1,1433;Database=master;User Id=SA;Password=yourStrong(!)Password;MultipleActiveResultSets=true");
                 return builder;
             }
         }
