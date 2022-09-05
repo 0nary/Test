@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj": {}
+    "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj": {}
   },
   "projects": {
     "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj": {
       "version": "4.9.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
         "projectName": "TestConsoleApp",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
+        "projectPath": "C:\\Users\\User\\source\\repos\\0nary\\Test\\TestConsoleApp\\TestConsoleApp.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\User\\Source\\Repos\\0nary\\Test\\TestConsoleApp\\obj\\",
         "projectStyle": "PackageReference",

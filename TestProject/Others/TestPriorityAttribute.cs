@@ -12,7 +12,5 @@ namespace TestProject.Attributes
         }
 
         public int Priority { get; private set; }
-
-        public TestPriorityAttribute(int priority) => Priority = priority;
     }
 }
