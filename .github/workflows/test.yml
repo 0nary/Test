@@ -25,6 +25,9 @@ jobs:
       
     - name: Build
       run: dotnet build "./TestConsoleApp.sln" --configuration Release --no-restore
+      
+    - name: start up MSSQL
+      run: docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
             
     - name: Test
       run: dotnet test --verbosity normal
