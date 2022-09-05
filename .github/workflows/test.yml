@@ -15,7 +15,20 @@ jobs:
     - name: set default output
       run: echo "::set-output name=success::false"
       
-    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/checkout@v3
+      with:
+        dotnet-version: 3.1.x
+        
+    - name: Restore dependencies
+      run: dotnet restore "./TestConsoleApp.sln"
+      
+    - name: Build
+      run: dotnet build "./TestConsoleApp.sln" --configuration Release --no-restore
+            
+    - name: Test
+      run: dotnet test --verbosity normal
+      
     - name: test echo
       run: echo "Test"
    

@@ -3,7 +3,8 @@
 namespace TestProject.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public class TestPriorityAttribute : Attribute
+    public class TestPriorityAttribute 
+        : Attribute
     {
         public TestPriorityAttribute(int priority)
         {
@@ -11,5 +12,7 @@ namespace TestProject.Attributes
         }
 
         public int Priority { get; private set; }
+
+        public TestPriorityAttribute(int priority) => Priority = priority;
     }
 }

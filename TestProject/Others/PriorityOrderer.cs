@@ -29,7 +29,7 @@ namespace TestProject.Orderers
             {
                 list.Sort((x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
                 foreach (TTestCase testCase in list)
-                    yield return testCase;
+                yield return testCase;
             }
         }
 
