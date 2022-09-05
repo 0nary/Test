@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TestProject.Attributes;
+using TestProject.DataBases;
 using Xunit;
 
 
@@ -74,6 +76,14 @@ namespace TestProject.Tests
             Assert.False(Test3Called, "3");
             Assert.True(Test2Called, "2");
             Assert.True(Test1Called, "1");
+        }
+
+        [Fact, TestPriority(6)]
+        public void TestDB()
+        {
+            TestDbContext testDbContext = new TestDbContext();            
+
+            Assert.True(testDbContext.Database.CanConnect());
         }
     }
 }
