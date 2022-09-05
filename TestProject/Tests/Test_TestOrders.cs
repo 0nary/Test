@@ -79,11 +79,13 @@ namespace TestProject.Tests
         }
 
         [Fact, TestPriority(6)]
-        public void TestDB()
+        public async void TestDB()
         {
-            TestDbContext testDbContext = new TestDbContext();            
+            TestDbContext testDbContext = new TestDbContext();
 
-            Assert.True(testDbContext.Database.CanConnect());
+            await testDbContext.Database.OpenConnectionAsync();
+
+            Assert.True( await testDbContext.Database.CanConnectAsync());
         }
     }
 }
