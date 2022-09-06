@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Auto-versioning
+
+# Controls when the workflow will run
+on:
+  workflow_call:
+  workflow_dispatch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  versioning:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    needs: test
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure remote repository
+        run: |
+          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/0nary/Test.git"
+      - name : Install Versioning.NET
+        run: |
+          dotnet tool install --global Versioning.NET
+      - name : Updating version
+        run: |
+          dotnet-version increment-version-with-git -g "." -b main
+          
+      #Setup and Build
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
