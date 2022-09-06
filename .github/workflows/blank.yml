@@ -14,9 +14,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  test: 
+  testing:
     uses: ./.github/workflows/test.yml
-
+    secrets: inherit
+    
   versioning:
-    needs: test
-    uses: ./.github/workflows/versioning.yml    
+    needs: testing
+    uses: ./.github/workflows/versioning.yml   
