@@ -19,5 +19,5 @@ jobs:
     uses: ./.github/workflows/test.yml
 
   versioning:
-    uses: ./.github/workflows/versioning.yml    
     needs: test
+    uses: ./.github/workflows/versioning.yml    
