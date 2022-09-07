@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.x.x
+          dotnet-version: 5.x.x
 
       - name: Configure remote repository
         run: |
