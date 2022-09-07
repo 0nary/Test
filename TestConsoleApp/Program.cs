@@ -8,6 +8,7 @@ namespace TestConsoleApp
         {
             Console.WriteLine("Hello World!");
             Console.WriteLine("Hello auto-versioning!");
+            Console.WriteLine("Hello auto-versioning!");
             Console.ReadLine();
         }
     }
