@@ -11,7 +11,7 @@ on:
 jobs:
   versioning:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -19,11 +19,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.x.x
 
       - name: Configure remote repository
         run: |
@@ -36,7 +31,10 @@ jobs:
           dotnet-version increment-version-with-git -g "." -b main
           
       #Setup and Build
-      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
