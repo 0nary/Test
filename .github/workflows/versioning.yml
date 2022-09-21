@@ -23,12 +23,13 @@ jobs:
       - name: Configure remote repository
         run: |
           git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/0nary/Test.git"
+          git checkout ${{ github.ref_name }}
       - name : Install Versioning.NET
         run: |
           dotnet tool install --global Versioning.NET
-      - name : Updating version
+      - name : Update version
         run: |
-          dotnet-version increment-version-with-git -g "." -b main
+          dotnet-version increment-version-with-git -g "." --branch-name ${{ github.ref_name }} --author-email actions@github.com
           
       #Setup and Build
       - name: Setup .NET
