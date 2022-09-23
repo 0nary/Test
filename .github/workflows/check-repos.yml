@@ -1,4 +1,4 @@
-name: .NET
+name: check-repos
 
 on:
    workflow_call:
