@@ -14,7 +14,7 @@ on:
 jobs:
   
   testing:
-    if: ${{ github.repository }} != 0nary/Test
+    if: ${{ github.repository }} == 0nary/Test/rate
     uses: ./.github/workflows/test.yml
     
   versioning:
