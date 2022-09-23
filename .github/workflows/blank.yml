@@ -20,7 +20,7 @@ jobs:
       run: echo ${{ github.repository }}
   
   testing:
-    if: ${{ github.repository }} != ${{ github.repository }}
+    if: github.repository != github.repository 
     uses: ./.github/workflows/test.yml
     
   versioning:
