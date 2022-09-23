@@ -12,9 +12,15 @@ on:
   workflow_dispatch:
 
 jobs:
+
+  get-repository:
+    runs-on: ubuntu-latest
+    steps:
+    - name: get repository
+      run: echo ${{ github.repository }}
   
   testing:
-    if: ${{ github.repository }} == 0nary/Test/rate
+    if: ${{ github.repository }} != ${{ github.repository }}
     uses: ./.github/workflows/test.yml
     
   versioning:
