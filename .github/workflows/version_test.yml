@@ -24,7 +24,7 @@ jobs:
           
       - name: Reset Origin
         run: |
-          git remote set-url origin "https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}/tree/version/test.git"
+          git remote set-url origin "https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git checkout ${{ github.ref_name }}
 #   github.actor will be the account how will perform the push (or most of the case 'merge pull request'). (May better to use github.triggering_actor for reruns.)
 #   secrets.GITHUB_TOKEN was the token creates for the current action, it is associated with the actor and will persist until the end of the action.
@@ -52,7 +52,7 @@ jobs:
           
       - name: Increment Version
         run: |
-          dotnet-version increment-version-with-git -g "." --branch-name ${{ github.ref_name }} --author-email actions@github.com
+          dotnet-version increment-version-with-git -g "." --branch-name "version/test" --author-email actions@github.com
         #dotnet-version increment-version -d "." -v Patch
         #dotnet-version increment-version-with-git -g "." --branch-name ${{ github.ref_name }} --author-email actions@github.com
           
