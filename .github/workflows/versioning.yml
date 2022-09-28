@@ -24,7 +24,7 @@ jobs:
           
       - name: Reset Origin
         run: |
-          git remote set-url origin "https://0nary:${{ secrets.GitHubAccessToken }}@github.com/${{ github.repository }}.git"
+          git remote set-url origin "https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git checkout ${{ github.ref_name }}
 #   github.actor will be the account how will perform the push (or most of the case 'merge pull request'). (May better to use github.triggering_actor for reruns.)
 #   secrets.GITHUB_TOKEN was the token creates for the current action, it is associated with the actor and will persist until the end of the action.
@@ -58,4 +58,4 @@ jobs:
         run: git commit -m "this is bot increment" -a
           
       - name: force push 
-        run: git push --signed=true --repo="https://0nary:${{ secrets.Password }}@github.com/${{ github.repository }}.git"
+        run: git push --signed=true --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
