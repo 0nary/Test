@@ -19,24 +19,43 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Configure remote repository
+          persist-credentials: false
+          
+          
+      - name: Reset Origin
         run: |
-          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/0nary/Test.git"
+          git remote set-url origin "https://0nary:${{ secrets.GitHubAccessToken }}@github.com/${{ github.repository }}.git"
           git checkout ${{ github.ref_name }}
-      - name : Install Versioning.NET
+#   github.actor will be the account how will perform the push (or most of the case 'merge pull request'). (May better to use github.triggering_actor for reruns.)
+#   secrets.GITHUB_TOKEN was the token creates for the current action, it is associated with the actor and will persist until the end of the action.
+#   github.ref_name work fine if the trigger was a push/merge.
+          
+      - name: Import bot's GPG key for signing commits
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.BOT_GPG_PRIVATE_KEY }}
+          git_config_global: true
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          
+      - name: Setup CI GIT
+        run: |
+          git config user.name "${{ steps.import_gpg.outputs.name }}"
+          git config user.email ${{ steps.import_gpg.outputs.email }}
+          git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
+          git config --global commit.gpgsign true
+          
+      - name: Install Versioning.NET
         run: |
           dotnet tool install --global Versioning.NET
-      - name : Update version
-        run: |
-          dotnet-version increment-version-with-git -g "." --branch-name ${{ github.ref_name }} --author-email actions@github.com
           
-      #Setup and Build
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.x
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --no-restore
+      - name: Increment Version
+        run: |
+          dotnet-version increment-version -d "." -v Patch
+          
+      - name: Commit changes
+        run: git commit -m "this is bot increment" -a
+          
+      - name: force push 
+        run: git push --signed=true --repo="https://0nary:${{ secrets.GitHubAccessToken }}@github.com/${{ github.repository }}.git"
