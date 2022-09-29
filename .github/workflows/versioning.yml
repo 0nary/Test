@@ -10,6 +10,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   versioning:
+    outputs:
+      output1: ${{ steps.get-commit-id.outputs.increment }}
     # The type of runner that the job will run on
     runs-on: windows-latest
 
@@ -59,7 +61,9 @@ jobs:
         
       - name: Get commit id
         id: get-commit-id
-        run: git log -1 | grep ^commit | awk '{::set-output name=commitid::$2}'
+        run: |
+          git log -1 | grep ^commit | awk '{::set-output name=commitid::$2}'
+          git log -1 | grep ^commit | awk '{print $2}'
         
       - name: echo commit id
         run : echo ${{steps.get-commit-id.outputs.commitid}}"
