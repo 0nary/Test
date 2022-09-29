@@ -21,16 +21,6 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "action_state=yellow" >> $GITHUB_ENV
-      - name: Use the value
-        id: step_two
-        run: |
-          echo "${{ env.action_state }}" # This will output 'yellow'
-          
-          
       - name: Reset Origin
         run: |
           git remote set-url origin "https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
