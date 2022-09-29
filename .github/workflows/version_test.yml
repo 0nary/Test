@@ -52,7 +52,7 @@ jobs:
           
       - name: Increment Version
         run: |
-          dotnet-version increment-version-with-git -g "version" --branch-name "test" --author-email actions@github.com
+          dotnet-version increment-version-with-git -g "." --branch-name "test" --author-email actions@github.com
         #dotnet-version increment-version -d "." -v Patch
         #dotnet-version increment-version-with-git -g "." --branch-name ${{ github.ref_name }} --author-email actions@github.com
           
