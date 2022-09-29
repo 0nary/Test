@@ -76,9 +76,10 @@ on:
       noneFloatingTags:
         type: string
         description: the floating tag for minor increment, commat separated.
-        default: ""
-   
-
+        default: ""   
+   outputs:
+      increment: 
+       value: ${{ jobs.get-repository.steps.get-increment.outputs.result }}
 jobs:
 
   get-repository:
@@ -177,4 +178,5 @@ jobs:
             }
             
     - name: output
+      id: output
       run: echo "${{steps.get-increment.outputs.result}}"
