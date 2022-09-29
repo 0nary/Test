@@ -56,6 +56,9 @@ jobs:
           
       - name: Commit changes
         run: git commit -m "this is bot increment" -a
+        
+      - name: Get commit id
+        run: git log -1 | grep ^commit | awk '{print $2}'
           
       - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
