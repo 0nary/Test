@@ -63,5 +63,5 @@ jobs:
                 console.log("Increment is unkown");
               }
             }
-            console.log("return increment = "+ reponse);
+            console.log("return increment = "+ response);
             return response;
