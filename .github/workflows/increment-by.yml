@@ -1,5 +1,5 @@
 
-name: Incrment by
+name: Increment by
 # Controls when the workflow will run
 on:
   workflow_call:
