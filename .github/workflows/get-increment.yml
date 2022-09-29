@@ -96,9 +96,9 @@ jobs:
             console.log("noneStartingTags = "+noneStartingTags);
             const noneFloatingTags = "${{inputs.noneFloatingTags}}".split(",");
             console.log("noneFloatingTags = "+noneFloatingTags);
-            const patchStartingTags = "${{.inputs.patchStartingTags}}".split(",");
+            const patchStartingTags = "${{inputs.patchStartingTags}}".split(",");
             console.log("patchStartingTags = "+patchStartingTags);
-            const patchFloatingTags = "${{.inputs.patchFloatingTags}}".split(",");
+            const patchFloatingTags = "${{inputs.patchFloatingTags}}".split(",");
             console.log("patchFloatingTags = "+patchFloatingTags);
             const minorStartingTags = "${{inputs.minorStartingTags}}".split(",");
             console.log("minorStartingTags = "+minorStartingTags);
