@@ -15,4 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: get repository
-      run: echo "${{ github.event.commits  }}"
+      run: |
+        echo "${{ github.event.commits  }}";
+        echo "${{ github.event.commits.length  }}";
+        echo "${{ github.event.commits[0]  }}";
+        echo "${{ github.event.commits[0].message  }}";
