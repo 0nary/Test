@@ -2,46 +2,6 @@ name: Get Increment
  
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-#  push:
-#    branches: [ "main" ] 
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-   inputs:
-      majorStartingTags:
-        type: string
-        description: the starting tags for major increment, commat separated.
-        default: ""
-      majorFloatingTags:
-        type: string
-        description: the floating tag for major increment, commat separated.
-        default: "#breaking"
-      minorStartingTags:
-        type: string
-        description: the starting tags for minor increment, commat separated.
-        default: "feat"
-      minorFloatingTags:
-        type: string
-        description: the floating tag for minor increment, commat separated.
-        default: ""
-      patchStartingTags:
-        type: string
-        description: the starting tags for patch increment, commat separated.
-        default: "fix, build, config, docs, perf, refactor, resolve, style, test, ci"
-      patchFloatingTags:
-        type: string
-        description: the floating tag for patch increment, commat separated.
-        default: ""
-      noneStartingTags:
-        type: string
-        description: the starting tags for minor increment, commat separated.
-        default: ""
-      noneFloatingTags:
-        type: string
-        description: the floating tag for minor increment, commat separated.
-        default: ""
-        
   # Allows you to run this workflow into a another workflow
   workflow_call:
    inputs:
@@ -83,6 +43,8 @@ on:
 jobs:
 
   get-repository:
+    outputs:
+      increment: ${{ steps.output.outputs.increment }}
     runs-on: ubuntu-latest
     steps:
         
@@ -179,4 +141,4 @@ jobs:
             
     - name: output
       id: output
-      run: echo "${{steps.get-increment.outputs.result}}"
+      run: echo "::set-output name=increment::steps.get-increment.outputs.result"
