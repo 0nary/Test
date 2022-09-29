@@ -33,13 +33,13 @@ jobs:
                 continue;
               }
               if(commit.message.includes("#breaking")){
-                console.log("Breaking tag found return major increment);
+                console.log("Breaking tag found return major increment");
                 return major;
               }
               else if (commit.message.startsWith("feat(")){
                 console.log("Commit set min increment to minor");
                 if(response < minor){
-                console.log("Increment update to minor);
+                console.log("Increment update to minor");
                 response = minor;
                 }
               }
@@ -55,7 +55,7 @@ jobs:
                   && commit.message.startsWith("ci(")){
                 console.log("Commit set min increment to patch");
                 if(response < patch){
-                console.log("Increment update to patch);
+                console.log("Increment update to patch");
                 response = patch;
                 }
               }
