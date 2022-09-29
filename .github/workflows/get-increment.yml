@@ -95,7 +95,7 @@ jobs:
         echo github.event.inputs.minorFloattingTags;
         echo github.event.inputs.majorStartingTags;
         echo github.event.inputs.majorFloattingTags;
-        echo github.event.inputs.doesnexist;
+        echo ${{github.event_name}};
         
     - name: Get increment
       id: get-increment
