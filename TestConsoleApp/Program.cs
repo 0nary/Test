@@ -8,6 +8,7 @@ namespace TestConsoleApp
         {
             //fix
             //ci
+            //feat
             Console.WriteLine("Hello World!");
             Console.WriteLine("Hello auto-versioning!");
             Console.WriteLine("Hello auto-versioning!");
