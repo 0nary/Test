@@ -65,19 +65,24 @@ jobs:
                 console.log("Increment is unkown");
               }
             }
-            console.log("return increment = "+ response);
+            console.log("increment = "+ response);
             switch (response){
               case 1:
+                console.log("return increment = None");
                 return "None";
               case 2:
+                console.log("return increment = Patch");
                 return "Patch";
               case 3:
+                console.log("return increment = Minor");
                 return "Minor";
               case 4:
+                console.log("return increment = Major");
                 return "Major";
               case 0:
               default:
-                return "Unkown";
+                console.log("return increment = Unknow");
+                return "Unknow";
             }
             
             
