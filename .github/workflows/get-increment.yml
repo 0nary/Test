@@ -84,6 +84,18 @@ jobs:
   get-repository:
     runs-on: ubuntu-latest
     steps:
+    
+    - name: echo input
+      run: |
+        echo github.event.inputs.noneStartingTags;
+        echo github.event.inputs.noneFloattingTags;
+        echo github.event.inputs.patchStartingTags;
+        echo github.event.inputs.patchFloattingTags;
+        echo github.event.inputs.minorStartingTags;
+        echo github.event.inputs.minorFloattingTags;
+        echo github.event.inputs.majorStartingTags;
+        echo github.event.inputs.majorFloattingTags;
+        echo github.event.inputs.doesnexist;
         
     - name: Get increment
       id: get-increment
