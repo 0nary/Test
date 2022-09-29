@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - run: echo ${{github.inputs.inputTest}};
-      - run: echo ${{inputs.inputTest}};
-      - run:   echo ${{github.inputs.inputTest2}};
-      - run:   echo ${{inputs.inputTest2}};
-      - run:   echo ${{github.event_name}};
+      - run: echo "${{github.inputs.inputTest}}";
+      - run: echo "${{inputs.inputTest}}";
+      - run:   echo "${{github.inputs.inputTest2}}";
+      - run:   echo "${{inputs.inputTest2}}";
+      - run:   echo "${{github.event_name}}";
