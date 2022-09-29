@@ -15,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         
-    - name: Get Increment
+    - name: Get increment
+      id: get-increment
       uses: actions/github-script@v6
       with:
+        result-encoding: string
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
             const unknow = 0;
@@ -34,7 +36,7 @@ jobs:
               }
               if(commit.message.includes("#breaking")){
                 console.log("Breaking tag found return major increment");
-                return major;
+                return "major";
               }
               else if (commit.message.startsWith("feat(")){
                 console.log("Commit set min increment to minor");
@@ -64,4 +66,20 @@ jobs:
               }
             }
             console.log("return increment = "+ response);
-            return response;
+            switch (response){
+              case '1':
+                return "None";
+              case '2':
+                return "Patch";
+              case '3':
+                return "Minor";
+              case '4':
+                return "Major";
+              case '0':
+              default:
+                return "Unkown";
+            }
+            
+            
+    - name: output
+      run: echo "${{steps.get-increment.outputs.result}}"
