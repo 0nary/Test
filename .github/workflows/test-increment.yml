@@ -1,0 +1,14 @@
+name: test
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ] 
+
+
+jobs:
+    
+  get incrment:
+    uses: ./.github/workflows/get-increment.yml   
+    secrets: inherit
