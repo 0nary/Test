@@ -62,7 +62,7 @@ jobs:
       - name: Get commit id
         id: get-commit-id
         run: |
-          echoc ::set-output name=commitid:: $(git log -1 | grep ^commit | awk '{print $2}')
+          echo ::set-output name=commitid:: $(git log -1 | grep ^commit | awk '{print $2}')
           git log -1 | grep ^commit | awk '{print $2}'
         
       - name: echo commit id
