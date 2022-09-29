@@ -141,4 +141,4 @@ jobs:
             
     - name: output
       id: output
-      run: echo ::set-output name=increment::${{steps.get-increment.outputs.result}}
+      run: echo "::set-output name=increment::${{steps.get-increment.outputs.result}}"
