@@ -62,11 +62,11 @@ jobs:
       - name: Get commit id
         id: get-commit-id
         run: |
-          git log -1 | grep ^commit | awk '{::set-output name=commitid::$2}'
+          echoc ::set-output name=commitid:: $(git log -1 | grep ^commit | awk 'git log -1 | grep ^commit | awk '{print $2}')
           git log -1 | grep ^commit | awk '{print $2}'
         
       - name: echo commit id
-        run : echo ${{steps.get-commit-id.outputs.commitid}}"
+        run : echo "${{steps.get-commit-id.outputs.commitid}}"
           
       - name: force push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
