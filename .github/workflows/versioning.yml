@@ -51,8 +51,6 @@ jobs:
           
       - name: Increment Version
         run: |
-          echo "commit_id=yellow" >> $GITHUB_ENV
-          echo "$(git log -1 | grep ^commit | awk '{print $2}')"
           dotnet-version increment-version -d "." -v Patch
           
       - name: Commit changes
@@ -60,8 +58,7 @@ jobs:
         
       - name: Get commit id
         run: |
-          COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')
-          echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
+          echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
         #  echo "commit_id=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
         #deprecated
         #run: echo "::set-env name=commit_id::$(git log -1 | grep ^commit | awk '{print $2}')"
