@@ -3,11 +3,81 @@ name: Get Increment
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ] 
+#  push:
+#    branches: [ "main" ] 
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+   inputs:
+      majorStartingTags:
+        type: string
+        description: the starting tags for major increment, commat separated.
+        default: ""
+      majorFloatingTags:
+        type: string
+        description: the floating tag for major increment, commat separated.
+        default: "#breaking"
+      minorStartingTags:
+        type: string
+        description: the starting tags for minor increment, commat separated.
+        default: "feat"
+      minorFloatingTags:
+        type: string
+        description: the floating tag for minor increment, commat separated.
+        default: ""
+      patchStartingTags:
+        type: string
+        description: the starting tags for patch increment, commat separated.
+        default: "fix, build, config, docs, perf, refactor, resolve, style, test, ci"
+      patchFloatingTags:
+        type: string
+        description: the floating tag for patch increment, commat separated.
+        default: ""
+      noneStartingTags:
+        type: string
+        description: the starting tags for minor increment, commat separated.
+        default: ""
+      noneFloatingTags:
+        type: string
+        description: the floating tag for minor increment, commat separated.
+        default: ""
+        
+  # Allows you to run this workflow into a another workflow
+  workflow_call:
+   inputs:
+      majorStartingTags:
+        type: string
+        description: the starting tags for major increment, commat separated.
+        default: ""
+      majorFloatingTags:
+        type: string
+        description: the floating tag for major increment, commat separated.
+        default: "#breaking"
+      minorStartingTags:
+        type: string
+        description: the starting tags for minor increment, commat separated.
+        default: "feat"
+      minorFloatingTags:
+        type: string
+        description: the floating tag for minor increment, commat separated.
+        default: ""
+      patchStartingTags:
+        type: string
+        description: the starting tags for patch increment, commat separated.
+        default: "fix, build, config, docs, perf, refactor, resolve, style, test, ci"
+      patchFloatingTags:
+        type: string
+        description: the floating tag for patch increment, commat separated.
+        default: ""
+      noneStartingTags:
+        type: string
+        description: the starting tags for minor increment, commat separated.
+        default: ""
+      noneFloatingTags:
+        type: string
+        description: the floating tag for minor increment, commat separated.
+        default: ""
+   
 
 jobs:
 
@@ -22,6 +92,14 @@ jobs:
         result-encoding: string
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
+            const noneStartingTags = ${{ intputs.noneStartingTags }}.split(",");
+            const noneFloatingTags = ${{ intputs.noneFloatingTags }}.split(",");
+            const patchStartingTags = ${{ intputs.patchStartingTags }}.split(",");
+            const patchFloatingTags = ${{ intputs.patchFloatingTags }}.split(",");
+            const minorStartingTags = ${{ intputs.minorStartingTags }}.split(",");
+            const minorFloatingTags = ${{ intputs.minorFloatingTags }}.split(",");
+            const majorStartingTags = ${{ intputs.majorStartingTags }}.split(",");
+            const majorFloatingTags = ${{ intputs.majorFloatingTags }}.split(",");
             const unknow = 0;
             const none = 1;
             const patch = 2;
@@ -31,60 +109,63 @@ jobs:
             for (const commit of commits) {
               console.log(commit.message);
               if(commit.message.includes("[skip hint]")){
-                console.log("Skip hint commit");
-                continue;
+              console.log("Skip hint commit");
+              continue;
               }
-              if(commit.message.includes("#breaking")){
-                console.log("Breaking tag found return major increment");
-                return "major";
+              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag))
+                || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.startsWith(tag))){
+              console.log("Commit set min increment to major");
+              if(response < major){
+              console.log("Increment update to major");
+              response = major;
               }
-              else if (commit.message.startsWith("feat(")){
-                console.log("Commit set min increment to minor");
-                if(response < minor){
-                console.log("Increment update to minor");
-                response = minor;
-                }
+              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag))
+                  || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.startsWith(tag))){
+              console.log("Commit set min increment to minor");
+              if(response < minor){
+              console.log("Increment update to minor");
+              response = minor;
               }
-              else if (commit.message.startsWith("fix(")
-                  || commit.message.startsWith("build(")
-                  || commit.message.startsWith("config(")
-                  || commit.message.startsWith("docs(")
-                  || commit.message.startsWith("perf(")
-                  || commit.message.startsWith("refactor(")
-                  || commit.message.startsWith("resolve(")
-                  || commit.message.startsWith("style(")
-                  || commit.message.startsWith("test(")
-                  || commit.message.startsWith("ci(")){
-                console.log("Commit set min increment to patch");
-                if(response < patch){
-                console.log("Increment update to patch");
-                response = patch;
-                }
+              }
+              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag))
+                  || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.startsWith(tag))){
+              console.log("Commit set min increment to patch");
+              if(response < patch){
+              console.log("Increment update to patch");
+              response = patch;
+              }
+              }
+              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag))
+                  || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.startsWith(tag))){
+              console.log("Commit set min increment to none");
+              if(response < none){
+              console.log("Increment update to none");
+              response = none;
+              }
               }
               else{
-                console.log("Increment is unkown");
+              console.log("Increment is unkown");
               }
             }
             console.log("increment = "+ response);
             switch (response){
               case 1:
-                console.log("return increment = None");
-                return "None";
+              console.log("return increment = None");
+              return "None";
               case 2:
-                console.log("return increment = Patch");
-                return "Patch";
+              console.log("return increment = Patch");
+              return "Patch";
               case 3:
-                console.log("return increment = Minor");
-                return "Minor";
+              console.log("return increment = Minor");
+              return "Minor";
               case 4:
-                console.log("return increment = Major");
-                return "Major";
+              console.log("return increment = Major");
+              return "Major";
               case 0:
               default:
-                console.log("return increment = Unknow");
-                return "Unknow";
+              console.log("return increment = Unknow");
+              return "Unknow";
             }
-            
             
     - name: output
       run: echo "${{steps.get-increment.outputs.result}}"
