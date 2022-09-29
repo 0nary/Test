@@ -9,6 +9,6 @@ on:
 
 jobs:
     
-  get incrment:
+  get-increment:
     uses: ./.github/workflows/get-increment.yml   
     secrets: inherit
