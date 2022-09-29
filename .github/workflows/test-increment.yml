@@ -11,4 +11,9 @@ jobs:
     
   get-increment:
     uses: ./.github/workflows/get-increment.yml   
-    secrets: inherit
+    
+  output-increment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: output
+        run: echo "${{jobs.get-increment.outputs.increment}}"
