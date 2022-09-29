@@ -51,6 +51,8 @@ jobs:
           
       - name: Increment Version
         run: |
+          echo "commit_id=yellow" >> $GITHUB_ENV
+          echo "$(git log -1 | grep ^commit | awk '{print $2}')"
           dotnet-version increment-version -d "." -v Patch
           
       - name: Commit changes
