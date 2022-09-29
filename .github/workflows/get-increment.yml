@@ -84,18 +84,6 @@ jobs:
   get-repository:
     runs-on: ubuntu-latest
     steps:
-    
-    - name: echo input
-      run: |
-        echo "github.event.input.noneStartingTags";
-        echo "${{github.event.input.noneFloattingTags}}";
-        echo "${{github.event.input.patchStartingTags}}";
-        echo "${{github.event.input.patchFloattingTags}}";
-        echo "${{github.event.input.minorStartingTags}}";
-        echo "${{github.event.input.minorFloattingTags}}";
-        echo "${{github.event.input.majorStartingTags}}";
-        echo "${{github.event.input.majorFloattingTags}}";
-        echo "${{github.event.input.doesnexist}}";
         
     - name: Get increment
       id: get-increment
@@ -105,21 +93,21 @@ jobs:
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
             console.log("commits = "+commits);
-            const noneStartingTags = "${{ github.event.input.noneStartingTags }}".split(",");
+            const noneStartingTags = "github.event.input.noneStartingTags".split(",");
             console.log("noneStartingTags = "+noneStartingTags);
-            const noneFloatingTags = "${{ github.event.input.noneFloatingTags }}".split(",");
+            const noneFloatingTags = "$github.event.input.noneFloatingTags".split(",");
             console.log("noneFloatingTags = "+noneFloatingTags);
-            const patchStartingTags = "${{ github.event.input.patchStartingTags }}".split(",");
+            const patchStartingTags = "$github.event.input.patchStartingTags".split(",");
             console.log("patchStartingTags = "+patchStartingTags);
-            const patchFloatingTags = "${{ github.event.input.patchFloatingTags }}".split(",");
+            const patchFloatingTags = "$github.event.input.patchFloatingTags".split(",");
             console.log("patchFloatingTags = "+patchFloatingTags);
-            const minorStartingTags = "${{ github.event.input.minorStartingTags }}".split(",");
+            const minorStartingTags = "$github.event.input.minorStartingTags".split(",");
             console.log("minorStartingTags = "+minorStartingTags);
-            const minorFloatingTags = "${{ github.event.input.minorFloatingTags }}".split(",");
+            const minorFloatingTags = "$github.event.input.minorFloatingTags".split(",");
             console.log("minorFloatingTags = "+minorFloatingTags);
-            const majorStartingTags = "${{ github.event.input.majorStartingTags }}".split(",");
+            const majorStartingTags = "github.event.input.majorStartingTags".split(",");
             console.log("majorStartingTags = "+majorStartingTags);
-            const majorFloatingTags = "${{ github.event.input.majorFloatingTags }}".split(",");
+            const majorFloatingTags = "github.event.input.majorFloatingTags".split(",");
             console.log("majorFloatingTags = "+majorFloatingTags);
             const unknow = 0;
             const none = 1;
