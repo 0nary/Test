@@ -1,0 +1,38 @@
+name: Get Increment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ] 
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+   inputs:
+      inputTest:
+        type: string
+        description: the starting tags for major increment, commat separated.
+        default: "C'est un succes"
+        
+  # Allows you to run this workflow into a another workflow
+  workflow_call:
+   inputs:
+      inputTest2:
+        type: string
+        description: the starting tags for major increment, commat separated.
+        default: "C'est un succes"
+   
+
+jobs:
+
+  get-repository:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: echo input
+      run: |
+        echo ${{github.inputs.inputTest}};
+        echo ${{inputs.inputTest}};
+        echo ${{github.inputs.inputTest2}};
+        echo ${{inputs.inputTest2}};
+        echo ${{github.event_name}};
