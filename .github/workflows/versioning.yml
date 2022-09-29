@@ -59,7 +59,7 @@ jobs:
       - name: Get commit id
         run: |
           git log -1 | grep ^commit | awk '{print $2}'
-          echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
+          echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')"
         #deprecated
         #run: echo "::set-env name=commit_id::$(git log -1 | grep ^commit | awk '{print $2}')"
         
