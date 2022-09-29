@@ -87,17 +87,18 @@ jobs:
     
     - name: echo input
       run: |
-        echo ${{ inputs.noneStartingTags }};
-        echo "${{ github.event.inputs.noneFloattingTags }}";
-        echo ${{ (github.event.inputs.patchStartingTags) }};
-        echo "${{ (github.event.inputs.patchFloattingTags) }}";
-        echo github.event.inputs.minorStartingTags;
-        echo github.event.inputs.minorFloattingTags;
-        echo github.event.inputs.majorStartingTags;
-        echo github.event.inputs.majorFloattingTags;
+        echo "${{inputs.noneStartingTags}}";
+        echo "${{inputs.noneFloatingTags}}";
+        echo "${{inputs.patchStartingTags}}";
+        echo "${{inputs.patchFloatingTags}}";
+        echo "${{inputs.minorStartingTags}}";
+        echo "${{inputs.minorFloatingTags}}";
+        echo "${{inputs.majorStartingTags}}";
+        echo "${{inputs.majorFloatingTags}}";
         echo ${{github.event_name}};
         
     - name: Get increment
+      if: false
       id: get-increment
       uses: actions/github-script@v6
       with:
