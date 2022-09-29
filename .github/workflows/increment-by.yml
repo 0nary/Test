@@ -1,0 +1,37 @@
+
+name: Incrment by
+# Controls when the workflow will run
+on:
+  workflow_call:
+    inputs:
+      increment:
+        type: string
+        description: the increment to apply.
+        default: "unknow"
+  
+jobs:
+  Update-version:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Reset Origin
+        run: |
+          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git checkout ${{ github.ref_name }}
+#   'github.actor' will be the account how will perform the push (or most of the case 'merge pull request').
+#   'secrets.GITHUB_TOKEN' was the token creates for the current action, it is associated with the 'github.actor' and will persist until the end of the action.
+
+      - name : Install Versioning.NET
+        run: |
+          dotnet tool install --global Versioning.NET
+          
+      - name : Updating version
+        run: |
+          dotnet-version increment-version -d "." -v "${{inputs.increment}}"
