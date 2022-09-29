@@ -92,14 +92,14 @@ jobs:
         result-encoding: string
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
-            const noneStartingTags = ${{ intputs.noneStartingTags }}.split(",");
-            const noneFloatingTags = ${{ intputs.noneFloatingTags }}.split(",");
-            const patchStartingTags = ${{ intputs.patchStartingTags }}.split(",");
-            const patchFloatingTags = ${{ intputs.patchFloatingTags }}.split(",");
-            const minorStartingTags = ${{ intputs.minorStartingTags }}.split(",");
-            const minorFloatingTags = ${{ intputs.minorFloatingTags }}.split(",");
-            const majorStartingTags = ${{ intputs.majorStartingTags }}.split(",");
-            const majorFloatingTags = ${{ intputs.majorFloatingTags }}.split(",");
+            const noneStartingTags = ${{ github.event.inputs.noneStartingTags }}.split(",");
+            const noneFloatingTags = ${{ github.event.inputs.noneFloatingTags }}.split(",");
+            const patchStartingTags = ${{ github.event.inputs.patchStartingTags }}.split(",");
+            const patchFloatingTags = ${{ github.event.inputs.patchFloatingTags }}.split(",");
+            const minorStartingTags = ${{ github.event.inputs.minorStartingTags }}.split(",");
+            const minorFloatingTags = ${{ github.event.inputs.minorFloatingTags }}.split(",");
+            const majorStartingTags = ${{ github.event.inputs.majorStartingTags }}.split(",");
+            const majorFloatingTags = ${{ github.event.inputs.majorFloatingTags }}.split(",");
             const unknow = 0;
             const none = 1;
             const patch = 2;
