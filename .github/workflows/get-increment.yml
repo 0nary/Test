@@ -1,0 +1,67 @@
+name: Get Increment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ] 
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  get-repository:
+    runs-on: ubuntu-latest
+    steps:
+        
+    - name: Get Increment
+      uses: actions/github-script@v6
+      with:
+        script: |
+            const commits = ${{ toJSON(github.event.commits) }} ;
+            const unknow = 0;
+            const none = 1;
+            const patch = 2;
+            const minor = 3;
+            const major= 4;
+            var response = unknow ;          
+            for (const commit of commits) {
+              console.log(commit.message);
+              if(commit.message.includes("[skip hint]")){
+                console.log("Skip hint commit");
+                continue;
+              }
+              if(commit.message.includes("#breaking")){
+                console.log("Breaking tag found return major increment);
+                return major;
+              }
+              else if (commit.message.startsWith("feat(")){
+                console.log("Commit set min increment to minor");
+                if(response < minor){
+                console.log("Increment update to minor);
+                response = minor;
+                }
+              }
+              else if (commit.message.startsWith("fix(")
+                  && commit.message.startsWith("build(")
+                  && commit.message.startsWith("config(")
+                  && commit.message.startsWith("docs(")
+                  && commit.message.startsWith("perf(")
+                  && commit.message.startsWith("refactor(")
+                  && commit.message.startsWith("resolve(")
+                  && commit.message.startsWith("style(")
+                  && commit.message.startsWith("test(")
+                  && commit.message.startsWith("ci(")){
+                console.log("Commit set min increment to patch");
+                if(response < patch){
+                console.log("Increment update to patch);
+                response = patch;
+                }
+              }
+              else{
+                console.log("Increment is unkown");
+              }
+            }
+            console.log("return increment = "+ reponse);
+            return response;
