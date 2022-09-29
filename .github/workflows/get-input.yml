@@ -17,7 +17,7 @@ on:
   # Allows you to run this workflow into a another workflow
   workflow_call:
    inputs:
-      inputTest2:
+      inputTest:
         type: string
         description: the starting tags for major increment, commat separated.
         default: "C'est un succes"
