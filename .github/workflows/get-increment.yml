@@ -25,7 +25,7 @@ jobs:
             const patch = 2;
             const minor = 3;
             const major= 4;
-            var response = unknow ;          
+            let response = unknow ;          
             for (const commit of commits) {
               console.log(commit.message);
               if(commit.message.includes("[skip hint]")){
@@ -44,15 +44,15 @@ jobs:
                 }
               }
               else if (commit.message.startsWith("fix(")
-                  && commit.message.startsWith("build(")
-                  && commit.message.startsWith("config(")
-                  && commit.message.startsWith("docs(")
-                  && commit.message.startsWith("perf(")
-                  && commit.message.startsWith("refactor(")
-                  && commit.message.startsWith("resolve(")
-                  && commit.message.startsWith("style(")
-                  && commit.message.startsWith("test(")
-                  && commit.message.startsWith("ci(")){
+                  || commit.message.startsWith("build(")
+                  || commit.message.startsWith("config(")
+                  || commit.message.startsWith("docs(")
+                  || commit.message.startsWith("perf(")
+                  || commit.message.startsWith("refactor(")
+                  || commit.message.startsWith("resolve(")
+                  || commit.message.startsWith("style(")
+                  || commit.message.startsWith("test(")
+                  || commit.message.startsWith("ci(")){
                 console.log("Commit set min increment to patch");
                 if(response < patch){
                 console.log("Increment update to patch");
