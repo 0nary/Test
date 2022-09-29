@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: get repository
-      run: echo ${{ github.commits }}
+      run: echo ${{ github.event.head_commit }}
