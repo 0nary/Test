@@ -84,43 +84,29 @@ jobs:
   get-repository:
     runs-on: ubuntu-latest
     steps:
-    
-    - name: echo input
-      run: |
-        echo "${{inputs.noneStartingTags}}";
-        echo "${{inputs.noneFloatingTags}}";
-        echo "${{inputs.patchStartingTags}}";
-        echo "${{inputs.patchFloatingTags}}";
-        echo "${{inputs.minorStartingTags}}";
-        echo "${{inputs.minorFloatingTags}}";
-        echo "${{inputs.majorStartingTags}}";
-        echo "${{inputs.majorFloatingTags}}";
-        echo ${{github.event_name}};
         
     - name: Get increment
-      if: false
       id: get-increment
       uses: actions/github-script@v6
       with:
         result-encoding: string
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
-            console.log("commits = "+commits);
-            const noneStartingTags = github.event.inputs.noneStartingTags.split(",");
+            const noneStartingTags = "${{inputs.noneStartingTags}}".split(",");
             console.log("noneStartingTags = "+noneStartingTags);
-            const noneFloatingTags = github.event.inputs.noneFloatingTags.split(",");
+            const noneFloatingTags = "${{inputs.noneFloatingTags}}".split(",");
             console.log("noneFloatingTags = "+noneFloatingTags);
-            const patchStartingTags = github.event.inputs.patchStartingTags.split(",");
+            const patchStartingTags = "${{.inputs.patchStartingTags}}".split(",");
             console.log("patchStartingTags = "+patchStartingTags);
-            const patchFloatingTags = github.event.inputs.patchFloatingTags.split(",");
+            const patchFloatingTags = "${{.inputs.patchFloatingTags}}".split(",");
             console.log("patchFloatingTags = "+patchFloatingTags);
-            const minorStartingTags = github.event.inputs.minorStartingTags.split(",");
+            const minorStartingTags = "${{inputs.minorStartingTags}}".split(",");
             console.log("minorStartingTags = "+minorStartingTags);
-            const minorFloatingTags = github.event.inputs.minorFloatingTags.split(",");
+            const minorFloatingTags = "${{inputs.minorFloatingTags}}".split(",");
             console.log("minorFloatingTags = "+minorFloatingTags);
-            const majorStartingTags = github.event.inputs.majorStartingTags.split(",");
+            const majorStartingTags = "${{inputs.majorStartingTags}}".split(",");
             console.log("majorStartingTags = "+majorStartingTags);
-            const majorFloatingTags = github.event.inputs.majorFloatingTags.split(",");
+            const majorFloatingTags = "${{inputs.majorFloatingTags}}".split(",");
             console.log("majorFloatingTags = "+majorFloatingTags);
             const unknow = 0;
             const none = 1;
