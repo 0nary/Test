@@ -112,14 +112,15 @@ jobs:
               console.log("Skip hint commit");
               continue;
               }
-              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag))
+              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag)))
                 || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.startsWith(tag)))){
               console.log("Commit set min increment to major");
               if(response < major){
               console.log("Increment update to major");
               response = major;
               }
-              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag))
+              }
+              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag)))
                   || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.startsWith(tag)))){
               console.log("Commit set min increment to minor");
               if(response < minor){
@@ -127,7 +128,7 @@ jobs:
               response = minor;
               }
               }
-              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag))
+              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag)))
                   || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.startsWith(tag)))){
               console.log("Commit set min increment to patch");
               if(response < patch){
@@ -135,7 +136,7 @@ jobs:
               response = patch;
               }
               }
-              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag))
+              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag)))
                   || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.startsWith(tag)))){
               console.log("Commit set min increment to none");
               if(response < none){
