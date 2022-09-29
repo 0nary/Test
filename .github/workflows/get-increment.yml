@@ -4,6 +4,10 @@ name: Get Increment
 on:
   # Allows you to run this workflow into a another workflow
   workflow_call:
+   outputs:
+      increment:
+        description: "The first output string"
+        value: ${{ jobs.get-repository.outputs.output1 }}
    inputs:
       majorStartingTags:
         type: string
@@ -37,14 +41,11 @@ on:
         type: string
         description: the floating tag for minor increment, commat separated.
         default: ""   
-   outputs:
-      increment: 
-       value: ${{ jobs.get-repository.steps.get-increment.outputs.result }}
 jobs:
 
-  get-repository:
+  get-repository:    
     outputs:
-      increment: ${{ steps.get-increment.outputs.result }}
+      output1: ${{ steps.output.outputs.increment }}
     runs-on: ubuntu-latest
     steps:
         
@@ -141,4 +142,4 @@ jobs:
             
     - name: output
       id: output
-      run: echo "${{steps.get-increment.outputs.result}}"
+      run: echo "::set-output name=increment::${{steps.get-increment.outputs.result}}"
