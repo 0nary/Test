@@ -11,6 +11,7 @@ on:
   
 jobs:
   Update-version:
+    #check before call
     if: inputs.increment == "Major" || inputs.increment == "Minor" || inputs.increment == "Patch" 
     # The type of runner that the job will run on
     runs-on: windows-latest
@@ -56,5 +57,5 @@ jobs:
       - name: Commit changes
         run: git commit -m "this is bot increment" -a
           
-      - name: force push 
+      - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
