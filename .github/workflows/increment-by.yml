@@ -7,10 +7,11 @@ on:
       increment:
         type: string
         description: the increment to apply.
-        default: "unknow"
+        default: "Unknow"
   
 jobs:
   Update-version:
+    if: inputs.increment == "Major" || inputs.increment == "Minor" || inputs.increment == "Patch" 
     # The type of runner that the job will run on
     runs-on: windows-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
