@@ -120,32 +120,32 @@ jobs:
               console.log("Skip hint commit");
               continue;
               }
-              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag)))
-                || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.startsWith(tag)))){
+              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag.trim())))
+                || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
               console.log("Commit set min increment to major");
               if(response < major){
                 console.log("Increment update to major");
                 response = major;
               }
               }
-              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag)))
-                  || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.startsWith(tag)))){
+              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag.trim())))
+                  || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
               console.log("Commit set min increment to minor");
               if(response < minor){
                 console.log("Increment update to minor");
                 response = minor;
               }
               }
-              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag)))
-                  || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.startsWith(tag)))){
+              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag.trim())))
+                  || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
               console.log("Commit set min increment to patch");
               if(response < patch){
                 console.log("Increment update to patch");
                 response = patch;
               }
               }
-              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag)))
-                  || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.startsWith(tag)))){
+              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag.trim())))
+                  || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
               console.log("Commit set min increment to none");
               if(response < none){
                 console.log("Increment update to none");
