@@ -59,6 +59,9 @@ jobs:
         
       - name: Get commit id
         run: git log -1 | grep ^commit | awk '{print $2}'
+        
+      - name: Add tag
+        run: git tag -a ${{tagname}} ${{commitid}} -m "Tag Message"
           
       - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
