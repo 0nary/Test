@@ -44,7 +44,7 @@ jobs:
 
   get-repository:
     outputs:
-      increment: ${{ steps.output.outputs.increment }}
+      increment: ${{ steps.get-increment.outputs.result }}
     runs-on: ubuntu-latest
     steps:
         
@@ -141,4 +141,4 @@ jobs:
             
     - name: output
       id: output
-      run: echo "::set-output name=increment::${{steps.get-increment.outputs.result}}"
+      run: echo "${{steps.get-increment.outputs.result}}"
