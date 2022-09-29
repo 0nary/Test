@@ -87,10 +87,10 @@ jobs:
     
     - name: echo input
       run: |
-        echo github.event.inputs.noneStartingTags;
-        echo github.event.inputs.noneFloattingTags;
-        echo github.event.inputs.patchStartingTags;
-        echo github.event.inputs.patchFloattingTags;
+        echo ${{ github.event.inputs.noneStartingTags }};
+        echo "${{ github.event.inputs.noneFloattingTags }}";
+        echo ${{ toString(github.event.inputs.patchStartingTags) }};
+        echo "${{ toString(github.event.inputs.patchFloattingTags) }}";
         echo github.event.inputs.minorStartingTags;
         echo github.event.inputs.minorFloattingTags;
         echo github.event.inputs.majorStartingTags;
