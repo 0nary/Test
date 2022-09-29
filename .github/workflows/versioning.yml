@@ -58,7 +58,8 @@ jobs:
         run: git commit -m "this is bot increment" -a    
         
       - name: Get commit id
-        run: echo "::set-env name=commit_id::$(git log -1 | grep ^commit | awk '{print $2}')"
+        run: |
+          echo "commit_id=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
         
       - name: echo commit id
         run : echo "${{env.commit_id}}"
