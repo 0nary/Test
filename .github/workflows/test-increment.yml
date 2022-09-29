@@ -13,7 +13,8 @@ jobs:
     uses: ./.github/workflows/get-increment.yml   
     
   output-increment:
+    needs: get-increment
     runs-on: ubuntu-latest
     steps:
       - name: output
-        run: echo "${{jobs.get-increment.outputs.increment}}"
+        run: echo "${{needs.get-increment.outputs.increment}}"
