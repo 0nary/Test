@@ -12,7 +12,7 @@ on:
 jobs:
   Update-version:
     #check before call
-    #if: (inputs.increment == "Major" || inputs.increment == "Minor" || inputs.increment == "Patch")
+    if: ${{ inputs.increment == 'Major' || inputs.increment == 'Minor' || inputs.increment == 'Patch' }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest #windows-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -76,7 +76,7 @@ jobs:
               let oldTag = "${{env.LATEST_TAG}}";
               console.log("old tag = "+oldTag)   
               let newTag = "";
-              if(oldTag.startsWith(v))
+              if(oldTag.startsWith("v"))
                 oldTag = oldTag.substring(1)              
               const newTagMajor = parseInt(oldTag.split(",")[0]); 
               const newTagMinor = parseInt(oldTag.split(",")[1]);    
