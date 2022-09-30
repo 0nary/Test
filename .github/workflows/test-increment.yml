@@ -11,13 +11,6 @@ jobs:
     
   get-increment:
     uses: ./.github/workflows/get-increment.yml   
-    
-  output-increment:
-    needs: get-increment
-    runs-on: ubuntu-latest
-    steps:
-      - name: output
-        run: echo "${{needs.get-increment.outputs.increment}}"
         
   increment-version:
     needs: get-increment
@@ -25,6 +18,11 @@ jobs:
     secrets: inherit
     with:
       increment: ${{needs.get-increment.outputs.increment}}
+
+  build:
+    needs: increment-version
+    uses: ./.github/workflows/build-dotnet.yml
+    secrets: inherit
 
   release:
     needs: increment-version
