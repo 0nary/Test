@@ -13,6 +13,9 @@ jobs:
   Check-if-increment-is-Major-Minor-Patch:
      runs-on: ubuntu-latest
      steps:
+      - name: echo increment
+        run: |
+          echo increment is ${{ inputs.increment == 'Major' }}
       - name: Is major
         run: |
           echo increment is major? ${{ inputs.increment == 'Major' }}
