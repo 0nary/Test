@@ -66,6 +66,9 @@ jobs:
         
       - name: Get commit id
         run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
+        
+      - name: echo commit id
+        run: echo ${{env.COMMIT_ID}}
           
       - name: push commit
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
@@ -110,9 +113,6 @@ jobs:
               
       - name: echo tag
         run: echo ${{steps.update-tag.outputs.result}}
-        
-      - name: echo sha
-        run: echo context.sha
         
       - name: Add tag
         uses: actions/github-script@v3
