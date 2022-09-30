@@ -111,6 +111,9 @@ jobs:
       - name: echo tag
         run: echo ${{steps.update-tag.outputs.result}}
         
+      - name: echo sha
+        run: echo context.sha
+        
       - name: Add tag
         uses: actions/github-script@v3
         env:
