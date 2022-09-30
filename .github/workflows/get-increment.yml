@@ -7,7 +7,7 @@ on:
    outputs:
       increment:
         description: "The first output string"
-        value: ${{ jobs.get-repository.outputs.output1 }}
+        value: ${{ jobs.get-increment.outputs.output1 }}
    inputs:
       majorStartingTags:
         type: string
