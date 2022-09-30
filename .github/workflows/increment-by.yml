@@ -122,7 +122,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
              ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
-              sha: ${{env.COMMIT_ID}}
+              sha: context.sha
             })
         #run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
           
