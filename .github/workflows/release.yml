@@ -26,8 +26,7 @@ name: Release
 #        (not implemented in this CL)
 on:
   push:
-    tags:
-      - v*
+    tags: [ "*" ]
 jobs:
   build:
     name: create release
