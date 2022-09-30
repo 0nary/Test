@@ -29,6 +29,14 @@ jobs:
 #   secrets.GITHUB_TOKEN was the token creates for the current action, it is associated with the actor and will persist until the end of the action.
 #   github.ref_name work fine if the trigger was a push/merge.
           
+      - name: Install Versioning.NET
+        run: |
+          dotnet tool install --global Versioning.NET
+          
+      - name: Increment Version
+        run: |
+          dotnet-version increment-version -d "." -v Patch
+          
       - name: Import bot's GPG key for signing commits
         id: import-gpg
         uses: crazy-max/ghaction-import-gpg@v4
@@ -45,20 +53,8 @@ jobs:
           git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
           git config --global commit.gpgsign true
           
-      - name: Install Versioning.NET
-        run: |
-          dotnet tool install --global Versioning.NET
-          
-      - name: Increment Version
-        run: |
-          dotnet-version increment-version -d "." -v Patch
-          
       - name: Commit changes
         run: |
-          git config user.name "${{ steps.import_gpg.outputs.name }}"
-          git config user.email ${{ steps.import_gpg.outputs.email }}
-          git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
-          git config --global commit.gpgsign true
           git commit -m "this is bot increment" -a   
         
       - name: Pull latest version tag
