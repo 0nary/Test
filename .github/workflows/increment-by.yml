@@ -83,7 +83,7 @@ jobs:
               const newTagPatch = parseInt(oldTag.split(",")[2]);  
               if(oldTag.startsWith("v"))
                 newTag = "v"
-              switch(${{inputs.increment}}){
+              switch("${{inputs.increment}}"){
                 case "Patch":     
                   newTag += newTagMajor+"."+newTagMinor+"."+(newTagPatch+1)
                   break;
