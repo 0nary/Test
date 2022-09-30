@@ -14,7 +14,7 @@ jobs:
     #check before call
     if: inputs.increment == "Major" || inputs.increment == "Minor" || inputs.increment == "Patch" 
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest #windows-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -38,10 +38,11 @@ jobs:
           git_config_global: true
           git_user_signingkey: true
           git_commit_gpgsign: true
+          #${{ steps.import_gpg.outputs.name }} is empty 
           
       - name: Setup CI GIT
         run: |
-          git config user.name ${{ steps.import_gpg.outputs.name }}
+          git config user.name "Gregoire Poncelet"
           git config user.email ${{ steps.import_gpg.outputs.email }}
           git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
           git config --global commit.gpgsign true 
@@ -49,6 +50,12 @@ jobs:
       - name : Install Versioning.NET
         run: |
           dotnet tool install --global Versioning.NET
+          
+      - name: Pull latest version tag
+        run: |
+          git fetch
+          git pull
+          echo "LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_ENV
           
       - name : Updating version
         run: |
@@ -58,10 +65,45 @@ jobs:
         run: git commit -m "this is bot increment" -a
         
       - name: Get commit id
-        run: git log -1 | grep ^commit | awk '{print $2}'
+        run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
+        
+      - name: Update tag
+        id: update-tag
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+              let oldTag = "${{env.LATEST_TAG}}";
+              console.log("old tag = "+oldTag)   
+              let newTag = "";
+              if(oldTag.startsWith(v))
+                oldTag = oldTag.substring(1)              
+              const newTagMajor = parseInt(oldTag.split(",")[0]); 
+              const newTagMinor = parseInt(oldTag.split(",")[1]);    
+              const newTagPatch = parseInt(oldTag.split(",")[2]);  
+              if(oldTag.startsWith(v))
+                newTag = "v"
+              switch(${{inputs.increment}}){
+                case "Patch":     
+                  newTag += newTagMajor+"."+newTagMinor+"."+(newTagPatch+1)
+                  break;
+                case "Minor":     
+                  newTag += newTagMajor+"."+(newTagMinor+1)+"."+newTagPatch
+                  break;
+                case "Major":     
+                  newTag += (newTagMajor+1)+"."+newTagMinor+"."+newTagPatch
+                  break;
+                default:
+                  newTag = oldTag;
+                  break;
+              }
+              return newTag
+              
+      - name: echo tag
+        run: echo ${{steps.update-tag.outputs.result}}
         
       - name: Add tag
-        run: git tag -a ${{tagname}} ${{commitid}} -m "${{commitid}}"
+        run: git tag -a ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} -m "${{commitid}}"
           
       - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
