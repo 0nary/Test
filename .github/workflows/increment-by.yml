@@ -114,12 +114,6 @@ jobs:
       - name: echo tag
         run: echo ${{steps.update-tag.outputs.result}}
         
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-        
       - name: Add tag
         uses: actions/github-script@v3
         env:
@@ -128,12 +122,12 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             console.log("sha = "+context.sha);
-            console.log("commit id = "+${{env.COMMIT_ID}});
+            console.log("commit id = "+"${{env.COMMIT_ID}}");
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
              ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
-              sha: ${{env.COMMIT_ID}}
+              sha: "${{env.COMMIT_ID}}"
             });
         #run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
           
