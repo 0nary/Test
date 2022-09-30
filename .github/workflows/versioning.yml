@@ -54,7 +54,12 @@ jobs:
           dotnet-version increment-version -d "." -v Patch
           
       - name: Commit changes
-        run: git commit -m "this is bot increment" -a   
+        run: |
+          git config user.name "${{ steps.import_gpg.outputs.name }}"
+          git config user.email ${{ steps.import_gpg.outputs.email }}
+          git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
+          git config --global commit.gpgsign true
+          git commit -m "this is bot increment" -a   
         
       - name: Pull latest version tag
         run: |
