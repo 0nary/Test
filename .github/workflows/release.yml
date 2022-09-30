@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         id: build-dotnet-cache
         with:
-          path: ./**/Release/*.nupkg
+          path: ./TestConsoleApp/**/Release/*.nupkg
           key: build-dotnet-cache-${{ github.sha }}
 
       - name: Release
