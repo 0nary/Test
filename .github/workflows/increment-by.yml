@@ -79,20 +79,15 @@ jobs:
         with:
           result-encoding: string
           script: |
-              let oldTag = "${{env.LATEST_TAG}}";
+              const oldTag = "${{env.LATEST_TAG}}";
               console.log("old tag = "+oldTag)   
-              let newTag = "";
+              let newTag = oldTag;
               if(oldTag.startsWith("v"))
-                oldTag = oldTag.substring(1)
-              console.log("oldMajor = "+oldTag.split(".")[0]);
-              const newTagMajor = parseInt(oldTag.split(".")[0]); 
-              console.log("Major = "+newTagMajor);   
-              console.log("oldMinor = "+oldTag.split(".")[1]);
-              const newTagMinor = parseInt(oldTag.split(".")[1]); 
-              console.log("Minor = "+newTagMinor);
-              console.log("oldPatch = "+oldTag.split(".")[2]);
-              const newTagPatch = parseInt(oldTag.split(".")[2]);  
-              console.log("Patch = "+newTagPatch);
+                newTag = newTag.substring(1)
+              const newTagMajor = parseInt(newTag.split(".")[0]); 
+              const newTagMinor = parseInt(newTag.split(".")[1]); 
+              const newTagPatch = parseInt(newTag.split(".")[2]);  
+              newTag = "";
               if(oldTag.startsWith("v"))
                 newTag = "v"
               switch("${{inputs.increment}}"){
