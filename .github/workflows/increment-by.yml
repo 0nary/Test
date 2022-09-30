@@ -112,7 +112,19 @@ jobs:
         run: echo ${{steps.update-tag.outputs.result}}
         
       - name: Add tag
-        run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
+        uses: actions/github-script@v3
+        env:
+          TAG: ${{ steps.set-tag.outputs.tag_name }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+             ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
+              sha: ${{env.COMMIT_ID}}
+            })
+        #run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
           
       - name: push tag
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
