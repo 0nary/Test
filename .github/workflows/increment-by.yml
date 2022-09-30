@@ -10,24 +10,7 @@ on:
         default: "Unknow"
   
 jobs:
-  Check-if-increment-is-Major-Minor-Patch:
-     runs-on: ubuntu-latest
-     steps:
-      - name: echo increment
-        run: |
-          echo increment is ${{ inputs.increment}}
-      - name: Is major
-        run: |
-          echo increment is major? ${{ inputs.increment == 'Major' }}
-      - name: Is minor
-        run: |
-          echo increment is minor? ${{ inputs.increment == 'Minor' }}
-      - name: Is patch
-        run: |
-          echo increment is patch? ${{ inputs.increment == 'Patch' }}
-
   Update-version:
-    needs: Check-if-increment-is-Major-Minor-Patch
     #check before call
     if: ${{ inputs.increment == 'Major' || inputs.increment == 'Minor' || inputs.increment == 'Patch' }}
     # The type of runner that the job will run on
