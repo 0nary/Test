@@ -77,15 +77,5 @@ namespace TestProject.Tests
             Assert.True(Test2Called, "2");
             Assert.True(Test1Called, "1");
         }
-
-        [Fact, TestPriority(6)]
-        public async void TestDB()
-        {
-            TestDbContext testDbContext = new TestDbContext();
-
-            await testDbContext.Database.OpenConnectionAsync();
-
-            Assert.True( await testDbContext.Database.CanConnectAsync());
-        }
     }
 }
