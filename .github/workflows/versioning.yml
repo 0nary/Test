@@ -48,7 +48,7 @@ jobs:
           
       - name: Setup CI GIT
         run: |
-          git config --global user.name "${{ steps.import_gpg.outputs.name }}"
+          git config --global user.name "Gregoire Poncelet"
           git config --global user.email ${{ steps.import_gpg.outputs.email }}
           git config --global user.signingkey ${{ steps.import_gpg.outputs.keyid }}
           git config --global commit.gpgsign true
