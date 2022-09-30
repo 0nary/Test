@@ -56,21 +56,21 @@ jobs:
         result-encoding: string
         script: |
             const commits = ${{ toJSON(github.event.commits) }} ;
-            const noneStartingTags = "${{inputs.noneStartingTags}}".split(",");
+            const noneStartingTags = "${{inputs.noneStartingTags}}".toLowerCase().split(",");
             console.log("noneStartingTags = "+noneStartingTags);
-            const noneFloatingTags = "${{inputs.noneFloatingTags}}".split(",");
+            const noneFloatingTags = "${{inputs.noneFloatingTags}}".toLowerCase().split(",");
             console.log("noneFloatingTags = "+noneFloatingTags);
-            const patchStartingTags = "${{inputs.patchStartingTags}}".split(",");
+            const patchStartingTags = "${{inputs.patchStartingTags}}".toLowerCase().split(",");
             console.log("patchStartingTags = "+patchStartingTags);
-            const patchFloatingTags = "${{inputs.patchFloatingTags}}".split(",");
+            const patchFloatingTags = "${{inputs.patchFloatingTags}}".toLowerCase().split(",");
             console.log("patchFloatingTags = "+patchFloatingTags);
-            const minorStartingTags = "${{inputs.minorStartingTags}}".split(",");
+            const minorStartingTags = "${{inputs.minorStartingTags}}".toLowerCase().split(",");
             console.log("minorStartingTags = "+minorStartingTags);
-            const minorFloatingTags = "${{inputs.minorFloatingTags}}".split(",");
+            const minorFloatingTags = "${{inputs.minorFloatingTags}}".toLowerCase().split(",");
             console.log("minorFloatingTags = "+minorFloatingTags);
-            const majorStartingTags = "${{inputs.majorStartingTags}}".split(",");
+            const majorStartingTags = "${{inputs.majorStartingTags}}".toLowerCase().split(",");
             console.log("majorStartingTags = "+majorStartingTags);
-            const majorFloatingTags = "${{inputs.majorFloatingTags}}".split(",");
+            const majorFloatingTags = "${{inputs.majorFloatingTags}}".toLowerCase().split(",");
             console.log("majorFloatingTags = "+majorFloatingTags);
             const unknow = 0;
             const none = 1;
@@ -84,32 +84,32 @@ jobs:
               console.log("Skip hint commit");
               continue;
               }
-              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.includes(tag.trim())))
-                || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
+              if((majorFloatingTags[0] != "" && majorFloatingTags.some(tag => commit.message.toLowerCase().includes(tag.trim())))
+                || (majorStartingTags[0] != "" && majorStartingTags.some(tag => commit.message.toLowerCase().startsWith(tag.trim())))){
               console.log("Commit set min increment to major");
               if(response < major){
                 console.log("Increment update to major");
                 response = major;
               }
               }
-              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.includes(tag.trim())))
-                  || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
+              else if((minorFloatingTags[0] != "" && minorFloatingTags.some(tag => commit.message.toLowerCase().includes(tag.trim())))
+                  || (minorStartingTags[0] != "" && minorStartingTags.some(tag => commit.message.toLowerCase().startsWith(tag.trim())))){
               console.log("Commit set min increment to minor");
               if(response < minor){
                 console.log("Increment update to minor");
                 response = minor;
               }
               }
-              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.includes(tag.trim())))
-                  || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
+              else if((patchFloatingTags[0] != "" && patchFloatingTags.some(tag => commit.message.toLowerCase().includes(tag.trim())))
+                  || (patchStartingTags[0] != "" && patchStartingTags.some(tag => commit.message.toLowerCase().startsWith(tag.trim())))){
               console.log("Commit set min increment to patch");
               if(response < patch){
                 console.log("Increment update to patch");
                 response = patch;
               }
               }
-              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.includes(tag.trim())))
-                  || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.startsWith(tag.trim())))){
+              else if((noneFloatingTags[0] != "" && noneFloatingTags.some(tag => commit.message.toLowerCase().includes(tag.trim())))
+                  || (noneStartingTags[0] != "" && noneStartingTags.some(tag => commit.message.toLowerCase().startsWith(tag.trim())))){
               console.log("Commit set min increment to none");
               if(response < none){
                 console.log("Increment update to none");
