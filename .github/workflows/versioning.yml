@@ -56,11 +56,15 @@ jobs:
       - name: Commit changes
         run: git commit -m "this is bot increment" -a    
         
+      - name: Display SemVer
+        run: |
+          echo "SemVer: $GITVERSION_SEMVER" && echo "$version" && echo "$major.$minor.$patch"     
+          
       - name: Get commit id
         run: |
           git log -1 
           git log -1 | grep ^commit 
-          git log -1 | grep ^commit | awk 
+          git log -1 | grep ^commit | awk '{$2}'
           git log -1 | grep ^commit | awk '{print $2}'
           COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')
           echo "${COMMIT_ID}"
