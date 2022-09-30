@@ -43,7 +43,7 @@ on:
         default: ""   
 jobs:
 
-  get-repository:    
+  get-increment:    
     outputs:
       output1: ${{ steps.output.outputs.increment }}
     runs-on: ubuntu-latest
