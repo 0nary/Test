@@ -25,6 +25,6 @@ jobs:
     secrets: inherit
 
   release:
-    needs: increment-version
+    needs: build
     uses: ./.github/workflows/release.yml
     secrets: inherit
