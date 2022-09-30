@@ -77,10 +77,16 @@ jobs:
               console.log("old tag = "+oldTag)   
               let newTag = "";
               if(oldTag.startsWith("v"))
-                oldTag = oldTag.substring(1)              
+                oldTag = oldTag.substring(1)
+              console.log("oldMajor = "+oldTag.split(",")[0]);
               const newTagMajor = parseInt(oldTag.split(",")[0]); 
-              const newTagMinor = parseInt(oldTag.split(",")[1]);    
+              console.log("Major = "+newTagMajor);   
+              console.log("oldMinor = "+oldTag.split(",")[1]);
+              const newTagMinor = parseInt(oldTag.split(",")[1]); 
+              console.log("Minor = "+newTagMinor);
+              console.log("oldPatch = "+oldTag.split(",")[2]);
               const newTagPatch = parseInt(oldTag.split(",")[2]);  
+              console.log(Patch = "+newTagPatch);
               if(oldTag.startsWith("v"))
                 newTag = "v"
               switch("${{inputs.increment}}"){
