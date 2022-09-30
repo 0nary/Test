@@ -66,6 +66,9 @@ jobs:
         
       - name: Get commit id
         run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
+          
+      - name: push commit
+        run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
         
       - name: Update tag
         id: update-tag
@@ -111,5 +114,5 @@ jobs:
       - name: Add tag
         run: git tag -a ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} -m "Tag for new version" 
           
-      - name: push 
+      - name: push tag
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
