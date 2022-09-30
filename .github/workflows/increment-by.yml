@@ -109,7 +109,7 @@ jobs:
         run: echo ${{steps.update-tag.outputs.result}}
         
       - name: Add tag
-        run: git tag -a ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} # -m "test" 
+        run: git tag -a ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} -m "Tag for new version" 
           
       - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
