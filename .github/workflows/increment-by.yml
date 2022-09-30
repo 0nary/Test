@@ -121,7 +121,7 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-             ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
+              ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
               sha: "${{env.COMMIT_ID}}"
             });
         #run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
