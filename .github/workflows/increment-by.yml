@@ -121,12 +121,13 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
+            console.log(context.sha);
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
              ref: "refs/tags/${{ steps.update-tag.outputs.result }}",
               sha: context.sha
-            })
+            });
         #run: git tag ${{steps.update-tag.outputs.result}} ${{env.COMMIT_ID}} #-m "Tag for new version" 
           
       - name: push tag
