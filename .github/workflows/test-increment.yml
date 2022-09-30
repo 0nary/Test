@@ -23,3 +23,5 @@ jobs:
     needs: get-increment
     uses: ./.github/workflows/increment-by.yml
     secrets: inherit
+    with:
+      increment: ${{needs.get-increment.outputs.increment}}
