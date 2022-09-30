@@ -43,9 +43,9 @@ jobs:
         run: dotnet test "${{ env.SOLUTION }}" --no-restore --verbosity normal
       
       - name: Cache build items
-        #if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         uses: actions/cache@v3
         id: build-dotnet-cache
         with:
-          path: ./**/Release/*.nupkg
+          path: ./TestConsoleApp/**/Release/*.nupkg
           key: build-dotnet-cache-${{ github.sha }}

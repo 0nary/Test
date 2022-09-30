@@ -1,4 +1,4 @@
-name: test
+name: Continuous integration
 
 # Controls when the workflow will run
 on:
