@@ -15,7 +15,7 @@ jobs:
      steps:
       - name: echo increment
         run: |
-          echo increment is ${{ inputs.increment == 'Major' }}
+          echo increment is ${{ inputs.increment}}
       - name: Is major
         run: |
           echo increment is major? ${{ inputs.increment == 'Major' }}
