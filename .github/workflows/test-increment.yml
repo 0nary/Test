@@ -25,3 +25,8 @@ jobs:
     secrets: inherit
     with:
       increment: ${{needs.get-increment.outputs.increment}}
+
+  release:
+    needs: increment-version
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
