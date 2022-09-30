@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 env:
-  SOLUTION: ./Dummy.sln
+  SOLUTION: ./TestConsoleApp.sln
 
 jobs:
   build:
