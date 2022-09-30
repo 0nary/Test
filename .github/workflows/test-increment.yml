@@ -18,3 +18,8 @@ jobs:
     steps:
       - name: output
         run: echo "${{needs.get-increment.outputs.increment}}"
+        
+  increment-version:
+    needs: get-increment
+    uses: ./.github/workflows/increment-by.yml
+    secrets: inherit
