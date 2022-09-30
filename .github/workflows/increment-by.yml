@@ -8,7 +8,11 @@ on:
         type: string
         description: the increment to apply.
         default: "Unknow"
-  
+      delete-suffixe:
+        type: boolean
+        description: remove the suffixe part of the last tag, if any?
+        default: false
+
 jobs:
   Update-version:
     #check before call
@@ -84,6 +88,8 @@ jobs:
               let newTag = oldTag;
               if(oldTag.startsWith("v"))
                 newTag = newTag.substring(1)
+              if(oldTag.includes("-"))
+                newTag = newTag.split("-")[0]
               const newTagMajor = parseInt(newTag.split(".")[0]); 
               const newTagMinor = parseInt(newTag.split(".")[1]); 
               const newTagPatch = parseInt(newTag.split(".")[2]);  
@@ -103,7 +109,9 @@ jobs:
                 default:
                   newTag = oldTag;
                   break;
-              }
+              }              
+              if(oldTag.includes("-") && )
+                newTag = oldTag.split("-")[1]
               return newTag
               
       - name: echo tag
