@@ -8,8 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
+
+  test:
+    uses: ./.github/workflows/test.yml 
     
   get-increment:
+    needs: test
     uses: ./.github/workflows/get-increment.yml   
         
   increment-version:
