@@ -6,16 +6,17 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
+      strategy:
+         matrix:
+           dotnet-version: ['3.1.x' ]
 
-    steps:
-    - name: Setup .NET
-      uses: actions/checkout@v3
-      with:
-        dotnet-version: 3.1.x
-        
-    - name: Restore dependencies
-      run: dotnet restore "./TestConsoleApp.sln"
-            
-    - name: Test
-      run: dotnet test --verbosity normal
+      steps:
+      - name: Setup .NET
+        uses: actions/checkout@v3
+
+      - name: Restore dependencies
+        run: dotnet restore "./TestConsoleApp.sln"
+
+      - name: Test
+        run: dotnet test --verbosity normal
