@@ -95,10 +95,10 @@ jobs:
                   newTag += newTagMajor+"."+newTagMinor+"."+(newTagPatch+1)
                   break;
                 case "Minor":     
-                  newTag += newTagMajor+"."+(newTagMinor+1)+"."+newTagPatch
+                  newTag += newTagMajor+"."+(newTagMinor+1)+".0"
                   break;
                 case "Major":     
-                  newTag += (newTagMajor+1)+"."+newTagMinor+"."+newTagPatch
+                  newTag += (newTagMajor+1)+".0.0"
                   break;
                 default:
                   newTag = oldTag;
