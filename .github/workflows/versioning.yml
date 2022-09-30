@@ -59,14 +59,12 @@ jobs:
           
       - name: Get commit id
         run: |
-          COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')
-          echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
-          echo "${COMMIT_ID}"
+          echo "COMMIT_ID=COMMIT_ID" >> $GITHUB_ENV
         #deprecated
         #run: echo "::set-env name=commit_id::$(git log -1 | grep ^commit | awk '{print $2}')"
         
       - name: echo commit id
         run : echo "${{env.COMMIT_ID}}"
           
-      - name: force push 
+      - name: push 
         run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
