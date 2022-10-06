@@ -106,7 +106,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            let version = ${{ steps.update-tag.outputs.result }};
+            let version = "${{ steps.update-tag.outputs.result }}";
             if(version.startsWith("v"))
                 version = version.substring(1);
             return version;
