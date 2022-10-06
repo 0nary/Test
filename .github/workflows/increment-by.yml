@@ -113,7 +113,8 @@ jobs:
             return version;
           
       - name: Commit changes
-        run: git commit -m "ci(Versioning): Increment version to ${{ steps.get-version.outputs.result }} [skip ci] [skip hint]" -a
+        run: |
+          git commit -m "ci(Versioning): Increment version to ${{ steps.get-version.outputs.result }} [skip ci] [skip hint]" -a
         
       - name: Get commit id
         run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
