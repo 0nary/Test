@@ -64,19 +64,7 @@ jobs:
       - name : Updating version
         run: |
           dotnet-version increment-version -d "." -v "${{inputs.increment}}"
-          
-      - name: Commit changes
-        run: git commit -m "this is bot increment" -a
-        
-      - name: Get commit id
-        run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
-        
-      - name: echo commit id
-        run: echo ${{env.COMMIT_ID}}
-          
-      - name: push commit
-        run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-        
+                  
       - name: Update tag
         id: update-tag
         uses: actions/github-script@v6
@@ -113,6 +101,28 @@ jobs:
               if(oldTag.includes("-") && )
                 newTag = oldTag.split("-")[1]
               return newTag
+      - name: Get new version
+        id: get-version
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            let version = ${{ steps.update-tag.outputs.result }};
+            if(version.startsWith("v"))
+                version = version.substring(1);
+            return version;
+          
+      - name: Commit changes
+        run: git commit -m "ci(Versioning): Increment version to ${{ steps.get-version.outputs.result }} [skip ci] [skip hint]" -a
+        
+      - name: Get commit id
+        run: echo "COMMIT_ID=$(git log -1 | grep ^commit | awk '{print $2}')" >> $GITHUB_ENV
+        
+      - name: echo commit id
+        run: echo ${{env.COMMIT_ID}}
+          
+      - name: push commit
+        run: git push --repo="https://0nary:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
               
       - name: echo tag
         run: echo ${{steps.update-tag.outputs.result}}
