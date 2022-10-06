@@ -98,8 +98,7 @@ jobs:
                   newTag = oldTag;
                   break;
               }              
-              if(oldTag.includes("-") && )
-                newTag = oldTag.split("-")[1]
+              
               return newTag
       - name: Get new version
         id: get-version
